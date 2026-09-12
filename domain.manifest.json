@@ -1,0 +1,94 @@
+{
+  "_instructions": "本文件是行业接入四件套之一。域 ID 一经分配不复用。填完跑平台侧校验器自测。",
+  "profile_version": "domain/1.0",
+  "domain_id": "ind",
+  "domain_name": "工业 · 安全生产风险分级",
+  "operator": {
+    "org": "待认领 — 本域开放给具备资质的运营方",
+    "contact": "见 README 的「认领方式」",
+    "agent_card": "https://SynomosAI.github.io/.well-known/agent-card.json"
+  },
+  "attributes": [
+    {
+      "key": "ind.safety_risk_level",
+      "type": "enum",
+      "values": [
+        "red",
+        "orange",
+        "yellow",
+        "blue",
+        "undetermined"
+      ],
+      "issuer_required": true,
+      "ttl_days": 365,
+      "assurance_min": "verified",
+      "visibility_default": "private"
+    },
+    {
+      "key": "ind.safety_production_license",
+      "type": "enum",
+      "values": [
+        "licensed",
+        "unlicensed",
+        "exempt",
+        "pending"
+      ],
+      "issuer_required": true,
+      "ttl_days": 365,
+      "assurance_min": "verified",
+      "visibility_default": "private"
+    },
+    {
+      "key": "ind.special_equipment_status",
+      "type": "enum",
+      "values": [
+        "inspected_valid",
+        "due_inspection",
+        "overdue",
+        "not_applicable"
+      ],
+      "issuer_required": true,
+      "ttl_days": 365,
+      "assurance_min": "verified",
+      "visibility_default": "private"
+    },
+    {
+      "key": "ind.work_permit",
+      "type": "enum",
+      "values": [
+        "valid",
+        "missing",
+        "expired",
+        "not_applicable"
+      ],
+      "issuer_required": true,
+      "ttl_days": 30,
+      "assurance_min": "verified",
+      "visibility_default": "private"
+    },
+    {
+      "key": "ind.ai_control_authority",
+      "type": "enum",
+      "values": [
+        "advisory_only",
+        "auto_shutdown_enabled",
+        "process_control",
+        "none"
+      ],
+      "issuer_required": true,
+      "ttl_days": 365,
+      "assurance_min": "verified",
+      "visibility_default": "private"
+    }
+  ],
+  "checker_endpoint": "mcp://pending-claim/ind-checker",
+  "gate_map_ref": "./gate-map.json",
+  "privacy_ref": "./privacy.json",
+  "red_lines": [
+    "风险等级须由企业按标准自行评定并留痕，AI 不得代为定级",
+    "不得输出可投产、可开机或符合安全生产条件的放行类表述，安全条件认定由监管部门与专业机构作出",
+    "AI 不得直接下发停机、工艺参数调整等控制指令，除非具备独立安全确认"
+  ],
+  "valid_from": "2026-09-12",
+  "status": "RESERVED"
+}
