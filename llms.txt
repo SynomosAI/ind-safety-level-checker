@@ -1,0 +1,34 @@
+# ind-safety-level-checker
+
+> 工业 · 安全生产风险分级域的「行业接入四件套」骨架：把「这条产线风险几级、哪些证照和作业票齐没齐」拆成可核验属性，核验器只出示与核验，不下安全结论。状态 RESERVED，开放给具备资质的运营方认领。
+
+`ind-safety-level-checker` 是一个 domain profile（域声明）仓，domain_id=`ind`，profile_version=`domain/1.0`。它不提供可运行服务，资产是四份机器可读 JSON：域声明、摩擦分级、隐私声明、核验器 IO 契约。
+
+## 核心文件
+
+- [domain.manifest.json](domain.manifest.json): 本域声明（属性清单 / 签发方要求 / 有效期 / 红线）
+- [gate-map.json](gate-map.json): 本域摩擦分级 silent/warn/confirm/block/require-owner
+- [privacy.json](privacy.json): 本域隐私声明（默认关闭 / 最小必要 / 可撤回 / 可删除）
+- [checker.io.json](checker.io.json): 本域核验器（MCP 工具）IO 契约，只出示不下判定
+- [README.md](README.md): 项目说明、快速开始与属性清单（中文）
+- [README.en.md](README.en.md): English README
+
+## 可选
+
+- [LICENSE](LICENSE): MIT License（© 2026 SynomosAI）
+- [CODEOWNERS](CODEOWNERS): @SynomosAI/synomosai-gov
+- [SECURITY.md](SECURITY.md): 安全策略与报告途径
+- [AGENTS.md](AGENTS.md): 给 AI Agent 的工作指引
+- [llms-full.txt](llms-full.txt): 本仓完整说明（llms.txt 完整版）
+
+## 本域属性（5 个）
+
+- `ind.safety_risk_level`：风险分级（red/orange/yellow/blue/undetermined）
+- `ind.safety_production_license`：安全生产许可状态（licensed/unlicensed/exempt/pending）
+- `ind.special_equipment_status`：特种设备检验有效期（inspected_valid/due_inspection/overdue/not_applicable）
+- `ind.work_permit`：危险作业票审批状态（valid/missing/expired/not_applicable）
+- `ind.ai_control_authority`：AI 生产控制权限边界（advisory_only/auto_shutdown_enabled/process_control/none）
+
+## 链接
+
+- 仓库: https://github.com/SynomosAI/ind-safety-level-checker

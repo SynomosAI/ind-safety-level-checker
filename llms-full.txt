@@ -1,0 +1,45 @@
+# ind-safety-level-checker — 完整文本
+
+本文件为 llms.txt 标准的「完整版」，供长上下文模型一次性读取本仓库的完整说明。
+
+## 这是什么
+
+`ind-safety-level-checker` 是 SynomosAI 多域核验平台的一个 domain profile（域声明）仓，domain_id=`ind`，域名称「工业 · 安全生产风险分级」，profile_version=`domain/1.0`，当前状态 `RESERVED`（占位，开放认领）。
+
+一句话：把「这条产线风险几级、哪些证照和作业票齐没齐」拆成可核验的属性，核验器只出示出处链、不下安全结论。
+
+## 解决什么问题
+
+1. 风险分级管控、特种设备检验、特种作业持证都有法定口径，AI 不该代为定级或认定安全条件。
+2. 需要把「缺哪个要件、哪个证到期」摆清楚，同时把「可投产/可开机/已符合安全条件」这类结论性输出挡在外面。
+3. AI 在生产控制中的权限边界必须显式声明（只建议、可紧急停机、还是可过程控制），防止越权下发控制指令。
+
+## 行业接入四件套
+
+- `domain.manifest.json`：域声明——5 个属性、签发方要求、ttl、assurance 下限、3 条红线。
+- `gate-map.json`：摩擦分级——结论类动作 require-owner；公域直发原始数据、跨境导出、面向客户/监管的结论性意见、合规声明全部 block。
+- `privacy.json`：隐私声明——默认关闭、最小必要、可撤回、可删除、默认不出境。
+- `checker.io.json`：核验器（MCP 工具）IO 契约——`shown/missing/expired/unverifiable` 四态；`_forbidden_outputs` 禁止一切专业判定结论。
+
+## 快速开始
+
+```bash
+git clone https://github.com/SynomosAI/ind-safety-level-checker.git
+cd ind-safety-level-checker
+python -m json.tool domain.manifest.json > /dev/null   # 校验四件套为合法 JSON
+python -m json.tool checker.io.json      > /dev/null
+```
+
+## 触发词
+
+安全生产风险分级 / 风险四色 / 特种设备检验 / 特种作业持证 / 动火作业票 / 受限空间 / AI 生产控制权限 / domain profile / gate map / privacy by default-off / MCP 核验器 / attribute verification / red line coverage / 行业接入四件套。
+
+## 许可与权利
+
+- 代码与配置按 MIT 许可使用（© 2026 SynomosAI，见根目录 LICENSE）。
+- 文档的知识版权归 SynomosAI 所有。
+- 本域核验器只出示与核验，不构成安全或合规结论；安全条件认定权在企业与监管部门。
+
+## 链接
+
+- 仓库: https://github.com/SynomosAI/ind-safety-level-checker
